@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:48:10 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/14 19:25:23 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:14:53 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ void parse_input(int argc, char **argv, t_sim *sim)
 	if ((!is_pos_num(argv[1])) || !is_pos_num(argv[2]) || !is_pos_num(argv[3])
 		||!is_pos_num(argv[4]) || (argc == 6 && !is_pos_num(argv[5])))
 		error_exit ("Error: Arguments must be positive integers\n.");
-	sim->philo_nubr = ft_pos_atol(argv[1]);
+	sim->philo_num = ft_pos_atol(argv[1]);
 	sim->time_to_die = ft_pos_atol(argv[2]);
 	sim->time_to_eat = ft_pos_atol(argv[3]);
 	sim->time_to_sleep = ft_pos_atol(argv[4]);
-	sim->meals_required = ft_pos_atol(argv[1]);
 	if (argc == 6)
 		sim->meals_required = ft_pos_atol(argv[5]);
 	else

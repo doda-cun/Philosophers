@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:40:44 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/14 20:27:31 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:39:27 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 // alloctae nad initialize forks, philos, shared sim values, like start time
 // each for must be amutext so only one philo holds it at a time
 
-void init_sim(t_sim *sim)
+void	simulation_init(t_sim *sim)
 {
-	int i;
+	int	i;
 
 	sim->forks = malloc(sizeof(pthread_mutex_t) * sim->philo_num);
-	if(!sim->forks)
+	if (!sim->forks)
 		error_exit("Failed to allocate fork.\n");
 	i = 0;
 	while (i < sim->philo_num)
 	{
-		pthread_mutex_init(&sim->forks[i], NULL);
+		pthread_mutex_init(&sim->forks[i], NULL);// init mutex for each fork of each philo
 		i++;
 	}
 	sim->philos = malloc(sizeof(t_philo) * sim->philo_num);
@@ -40,6 +40,13 @@ void init_sim(t_sim *sim)
 		sim->philos[i].sim = sim; // lets each philo acces shared datat form their own thread
 		sim->philos[i].left_fork = &sim->forks[i];
 		sim->philos[i].right_fork = &sim->forks[(i+1) % sim->philo_num];
+		pthread_mutex_init(&sim->philos[i].meal_lock, NULL);
+		i++;
 	}
+	pthread_mutex_init(&sim->print_lock,NULL);
+	pthread_mutex_init(&sim->end_lock,NULL);
+	sim->end_simulation= false;
+	sim->philos->full = false;
+	sim->start_time = get_time_ms();
 
 }

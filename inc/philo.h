@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:05 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/14 19:31:11 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:39:40 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct	s_philo
 	int	id;
 	long		meals_eaten;
 	long		last_meal_time;
+	bool		full;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t		meal_lock;
@@ -66,6 +67,9 @@ typedef	struct s_sim
 
 
 void	error_exit(char *error);
-void	parse_input(int argc, char **argv, t_sim *sim)
-
+void	parse_input(int argc, char **argv, t_sim *sim);
+long	get_time_ms(void);
+bool	simulation_has_ended(t_sim *sim);
+void	print_action(t_philo *philo, const char *action);
+void	simulation_init(t_sim *sim);
 #endif
