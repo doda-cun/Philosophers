@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:05 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/15 18:39:40 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:24:21 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,8 @@
 // fork = mutex; array of philo and array of mutex
 //
 //
-
-
-typedef struct	s_philo
-{
-	int	id;
-	long		meals_eaten;
-	long		last_meal_time;
-	bool		full;
-	pthread_mutex_t		*left_fork;
-	pthread_mutex_t		*right_fork;
-	pthread_mutex_t		meal_lock;
-	pthread_t	thread_id;
-	t_sim		*sim;
-}	t_philo;
+typedef struct s_sim t_sim;
+typedef struct s_philo t_philo;
 
 typedef struct	s_fork
 {
@@ -58,12 +46,26 @@ typedef	struct s_sim
 	long	time_to_sleep;
 	long	meals_required;
 	bool	end_simulation;
+	pthread_t	monitor_thread;
 	pthread_mutex_t	*forks;
 	t_philo	*philos;
 	pthread_mutex_t	end_lock; //safely read/write end_simulation
-	pthread_mutex_t	print_lock //??
+	pthread_mutex_t	print_lock; //safely print
 
 }	t_sim;
+
+typedef struct	s_philo
+{
+	int	id;
+	long		meals_eaten;
+	long		last_meal_time;
+	bool		full;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
+	pthread_mutex_t		meal_lock;
+	pthread_t	thread_id;
+	t_sim		*sim;
+}	t_philo;
 
 
 void	error_exit(char *error);
@@ -72,4 +74,14 @@ long	get_time_ms(void);
 bool	simulation_has_ended(t_sim *sim);
 void	print_action(t_philo *philo, const char *action);
 void	simulation_init(t_sim *sim);
+void	*philo_routine(void *arg);
+void	take_forks(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+void	*star_sim(t_sim *sim);
+void	join_threads(t_sim *sim);
+void	*monitor_simulation(void *arg);
+void	check_philo_death(t_sim *sim);
+void	check_all_full(t_sim *sim);
 #endif

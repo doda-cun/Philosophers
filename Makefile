@@ -6,44 +6,46 @@
 #    By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 18:40:13 by doda-cun          #+#    #+#              #
-#    Updated: 2025/05/15 18:47:56 by doda-cun         ###   ########.fr        #
+#    Updated: 2025/05/19 20:25:00 by doda-cun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC)
 SRCDIR = src
 OBJDIR = obj
+INC = inc/
 SRCS = $(SRCDIR)/main.c \
-			$(SRCDIR)/utils.c\
-			$(SRCDIR)/init.c \
-			$(SRCDIR)/philo_routine.c\
-			$(SRCDIR)/parsing.c\
-			$(SRCDIR)/libfthelp.c\
-OBJS = $(SRCS:.c=.o)
+            $(SRCDIR)/utils.c \
+            $(SRCDIR)/init.c \
+            $(SRCDIR)/philo_routine.c \
+            $(SRCDIR)/parsing.c \
+            $(SRCDIR)/libfthelp.c\
+			$(SRCDIR)/sim.c
+OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 # Build the executable
 $(NAME): $(OBJS)
-    @$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 # Compile source files into object files
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-    @mkdir -p $(OBJDIR)
-    @$(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Default target
 all: $(NAME)
 
 # Clean object files
 clean:
-    @rm -f $(OBJS)
-    @rm -rf $(OBJDIR)
+	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 
 # Clean everything
 fclean: clean
-    @rm -f $(NAME)
+	@rm -f $(NAME)
 
 # Rebuild everything
 re: fclean all
@@ -51,5 +53,9 @@ re: fclean all
 # Debug build
 debug: CFLAGS += -g
 debug: re
+
+debug-vars:
+	@echo SRCS = $(SRCS)
+	@echo OBJS = $(OBJS)
 
 .PHONY: all clean fclean re debug

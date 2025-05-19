@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 17:27:52 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/19 18:48:01 by doda-cun         ###   ########.fr       */
+/*   Created: 2025/05/15 19:12:35 by doda-cun          #+#    #+#             */
+/*   Updated: 2025/05/15 19:16:04 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// ./philo 5 800 200 200 [6]
 
-int main(int argc, char **argv)
+void check_routine(void *arg)
 {
-	t_sim	sim;
+	t_sim *sim = (t_sim *)arg;
+	int i;
 
-	if (argc == 5 || argc == 6)
+	while (!simulation_has_ended(sim))
 	{
-		parse_input(argc, argv, &sim);
-		simulation_init(&sim);
-		star_sim(&sim);
-		join_threads(&sim);
-		//clean_simu(sim);
-
-	}
-	else
-	{
-		error_exit("Wrong Input\n");
+		i = 0;
+		while (i < sim->philo_num)
+		{
+			
+		}
 	}
 }

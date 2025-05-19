@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:42:42 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/15 17:51:59 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:49:25 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_action(t_philo *philo, const char *action)
 	pthread_mutex_lock(&philo->sim->print_lock);
 	if (!simulation_has_ended(philo->sim))
 	{
-		printf("At %ls milliseconds after sim began, philosopher %d, %s\n",
+		printf("At %ld milliseconds after sim began, philosopher %d, %s\n",
 			get_time_ms() - philo->sim->start_time,
 			philo->id, action);
 	}
