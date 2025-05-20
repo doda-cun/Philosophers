@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:06:39 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/19 17:50:17 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:27:10 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,33 @@
 
 void	*philo_routine(void *arg)
 {
-	t_philo	*philo = (t_philo *)arg;
-	t_sim	*sim = philo->sim;
+	t_philo	*philo;
+	t_sim	*sim;
 //little delay for even numbers to avoid deadlock
-	if (philo->id % 2 == 0)
-		usleep(1000);
+	philo = (t_philo *)arg;
+	sim = philo->sim;
+	//if (philo->id % 2 == 0)
+	usleep(philo->id * 1000);
 	while (!simulation_has_ended(sim))
 	{
+		if (sim->philo_num == 1)
+		{
+			print_action(philo, "has taken a fork");
+			usleep(sim->time_to_die * 1000);
+			return (NULL);
+		}
 		take_forks(philo);
+		if (simulation_has_ended(sim))
+			break ;
 		philo_eat(philo);
+		if (simulation_has_ended(sim))
+			break ;
 		philo_sleep(philo);
+		if (simulation_has_ended(sim))
+			break ;
 		philo_think(philo);
+		if (simulation_has_ended(sim))
+			break ;
 	}
 	return (NULL);
 }
@@ -45,7 +61,6 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a right fork");
 	}
-
 }
 
 void	philo_eat(t_philo *philo)

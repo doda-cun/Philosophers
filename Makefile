@@ -6,7 +6,7 @@
 #    By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 18:40:13 by doda-cun          #+#    #+#              #
-#    Updated: 2025/05/19 20:25:00 by doda-cun         ###   ########.fr        #
+#    Updated: 2025/05/20 18:37:45 by doda-cun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = $(SRCDIR)/main.c \
             $(SRCDIR)/philo_routine.c \
             $(SRCDIR)/parsing.c \
             $(SRCDIR)/libfthelp.c\
-			$(SRCDIR)/sim.c
+			$(SRCDIR)/sim.c\
+			$(SRCDIR)/cleanup.c
 OBJS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCS))
 
 # Build the executable

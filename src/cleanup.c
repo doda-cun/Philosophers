@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 17:27:52 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/20 18:42:08 by doda-cun         ###   ########.fr       */
+/*   Created: 2025/05/20 18:28:11 by doda-cun          #+#    #+#             */
+/*   Updated: 2025/05/20 18:41:25 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// ./philo 5 800 200 200 [6]
 
-int main(int argc, char **argv)
+void	sim_clean(t_sim *sim)
 {
-	t_sim	sim;
+	int	i;
 
-	if (argc == 5 || argc == 6)
+	i = 0;
+	while (i < sim->philo_num)
 	{
-		parse_input(argc, argv, &sim);
-		simulation_init(&sim);
-		star_sim(&sim);
-		join_threads(&sim);
-		sim_clean(&sim);
+		pthread_mutex_destroy(&sim->forks[i]);
+		i++;
 	}
-	else
-		error_exit("Program needs 5 or 6 inputs to run.");
-	return (EXIT_SUCCESS);
+	free(sim->forks);
+	i = 0;
+	while (i < sim->philo_num)
+	{
+		pthread_mutex_destroy(&sim->philos[i].meal_lock);
+		i++;
+	}
+	free(sim->philos);
+	pthread_mutex_destroy(&sim->print_lock);
+	pthread_mutex_destroy(&sim->end_lock);
+
 }

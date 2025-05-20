@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:05 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/19 20:24:21 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:37:28 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void	join_threads(t_sim *sim);
 void	*monitor_simulation(void *arg);
 void	check_philo_death(t_sim *sim);
 void	check_all_full(t_sim *sim);
+void	sim_clean(t_sim *sim);
 #endif

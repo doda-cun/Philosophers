@@ -6,48 +6,47 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/19 20:24:41 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:32:39 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *star_sim(t_sim *sim)
+void	*star_sim(t_sim *sim)
 {
-	int i;
+	int	i;
 
 	sim->start_time = get_time_ms(); // save simulation start time
-
 	i = 0;
-	while(i < sim->philo_num)
+	while (i < sim->philo_num)
 	{
-		if(pthread_create(&sim->philos[i]. thread_id, NULL,
-			philo_routine, &sim->philos[i])!= 0)
+		if (pthread_create(&sim->philos[i].thread_id, NULL,
+				philo_routine, &sim->philos[i])!= 0)
 			error_exit("Error creating thread");
 		i++;
 	}
 	if (pthread_create(&sim->monitor_thread, NULL,
-		monitor_simulation, sim) != 0)
+			monitor_simulation, sim) != 0)
 		error_exit("Error creating monitor thread");
 	return (NULL);
 }
 
-void join_threads(t_sim *sim)
+void	join_threads(t_sim *sim)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < sim->philo_num)
+	while (i < sim->philo_num)
 	{
-		pthread_join(sim->philos[i].thread_id,NULL);
+		pthread_join(sim->philos[i].thread_id, NULL);
 		i++;
 	}
-	pthread_join(sim->monitor_thread,NULL);
+	pthread_join(sim->monitor_thread, NULL);
 }
 
-void *monitor_simulation(void *arg)
+void	*monitor_simulation(void *arg)
 {
-	t_sim *sim;
+	t_sim	*sim;
 
 
 	sim = (t_sim *)arg;
@@ -55,20 +54,20 @@ void *monitor_simulation(void *arg)
 	{
 		check_philo_death(sim);
 		check_all_full(sim);
-		usleep(1000);
+		usleep(500);
 	}
 	return (NULL);
 }
 
-void check_philo_death(t_sim *sim)
+void	check_philo_death(t_sim *sim)
 {
-	int i;
-	long now;
-	long time_since_last_meal;
-	t_philo *philo;
+	int		i;
+	long	now;
+	long	time_since_last_meal;
+	t_philo	*philo;
 
 	i = 0;
-	while (i < sim->philo_num)
+	while (i < sim->philo_num && !simulation_has_ended(sim))
 	{
 		philo = &sim->philos[i];
 		pthread_mutex_lock(&philo->meal_lock);
@@ -90,10 +89,10 @@ void check_philo_death(t_sim *sim)
 	}
 }
 
-void check_all_full(t_sim *sim)
+void	check_all_full(t_sim *sim)
 {
-	int i;
-	int full_count;
+	int	i;
+	int	full_count;
 
 	i = 0;
 	full_count = 0;

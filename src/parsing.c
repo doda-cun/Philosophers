@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:48:10 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/19 17:51:28 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:42:53 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "philo.h"
 
 
-static int is_pos_num(char *str)
+static int	is_pos_num(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -25,8 +25,9 @@ static int is_pos_num(char *str)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
+
 static long int	ft_pos_atol(const char *str)
 {
 	int		i;
@@ -36,15 +37,15 @@ static long int	ft_pos_atol(const char *str)
 	result = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result *10 + (str[i] -'0');
+		result = result * 10 + (str[i] - '0');
 		i++;
 	}
 	return (result);
 }
 
-void parse_input(int argc, char **argv, t_sim *sim)
+void	parse_input(int argc, char **argv, t_sim *sim)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (argc != 5 && argc != 6)
