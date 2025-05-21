@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sim.c                                              :+:      :+:    :+:   */
+/*   sim_mon.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/20 20:21:12 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:32:38 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ void	check_philo_death(t_sim *sim)
 			sim->end_simulation = true;
 			pthread_mutex_unlock(&sim->end_lock);
 			pthread_mutex_lock(&sim->print_lock);
-			printf("At %ld ms after sim began, philosopher %d died\n",
+			printf("DEATH: At %ld ms after sim began, philosopher %d died\n",
 				now - sim->start_time, philo->id);
+			printf("CAUSE: Philo %d time since last meal: %ld ms (limit : %ld ms)\n",
+				philo->id, time_since_last_meal, sim->time_to_die);
 			pthread_mutex_unlock(&sim->print_lock);
 			return ;
 		}

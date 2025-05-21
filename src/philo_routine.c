@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:06:39 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/20 19:27:10 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:16:03 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,19 @@ void	*philo_routine(void *arg)
 
 void	take_forks(t_philo *philo)
 {
+	if (simulation_has_ended(philo->sim))
+		return;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a right fork");
 		pthread_mutex_lock(philo->left_fork);
+		if (simulation_has_ended(philo->sim))
+        {
+            pthread_mutex_unlock(philo->right_fork);
+			pthread_mutex_unlock(philo->left_fork);
+            return;
+        }
 		print_action(philo, "has taken a left fork");
 	}
 	else
@@ -59,12 +67,25 @@ void	take_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, "has taken a left fork");
 		pthread_mutex_lock(philo->right_fork);
+		if (simulation_has_ended(philo->sim))
+        {
+            pthread_mutex_unlock(philo->left_fork);
+			pthread_mutex_unlock(philo->right_fork);
+            return;
+        }
 		print_action(philo, "has taken a right fork");
 	}
 }
 
 void	philo_eat(t_philo *philo)
 {
+	if ((philo->meals_eaten == philo->sim->meals_required)
+		|| simulation_has_ended(philo->sim))
+	{
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
+		return ;
+	}
 	pthread_mutex_lock(&philo->meal_lock);
 	philo->last_meal_time = get_time_ms();
 	pthread_mutex_unlock(&philo->meal_lock);
