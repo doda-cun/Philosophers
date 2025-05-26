@@ -6,14 +6,14 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:27:52 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/20 18:42:08 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:27:28 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 // ./philo 5 800 200 200 [6]
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_sim	sim;
 

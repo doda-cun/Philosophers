@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:40:44 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/22 18:31:15 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:21:50 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	simulation_init(t_sim *sim)
 	i = 0;
 	while (i < sim->philo_num)
 	{
-		pthread_mutex_init(&sim->forks[i], NULL);// init mutex for each fork of each philo
+		pthread_mutex_init(&sim->forks[i], NULL);
 		i++;
 	}
 	sim->philos = malloc(sizeof(t_philo) * sim->philo_num);
@@ -35,18 +35,22 @@ void	simulation_init(t_sim *sim)
 	i = 0;
 	while (i < sim->philo_num)
 	{
-		sim->philos[i].id = i + 1;
-		sim->philos[i].meals_eaten = 0;
-		sim->philos[i].last_meal_time = sim->start_time;
-		sim->philos[i].sim = sim; // lets each philo acces shared datat form their own thread
-		sim->philos[i].left_fork = &sim->forks[i];
-		sim->philos[i].right_fork = &sim->forks[(i+1) % sim->philo_num];
-		pthread_mutex_init(&sim->philos[i].meal_lock, NULL);
-		sim->philos[i].full = false;
+		struct_init(sim, i);
 		i++;
 	}
 	pthread_mutex_init(&sim->print_lock, NULL);
 	pthread_mutex_init(&sim->end_lock, NULL);
 	sim->end_simulation = false;
+}
 
+void	struct_init(t_sim *sim, int i)
+{
+	sim->philos[i].id = i + 1;
+	sim->philos[i].meals_eaten = 0;
+	sim->philos[i].last_meal_time = sim->start_time;
+	sim->philos[i].sim = sim; // lets each philo acces shared datat form their own thread
+	sim->philos[i].left_fork = &sim->forks[i];
+	sim->philos[i].right_fork = &sim->forks[(i + 1) % sim->philo_num];
+	pthread_mutex_init(&sim->philos[i].meal_lock, NULL);
+	sim->philos[i].full = false;
 }

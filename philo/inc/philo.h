@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:05 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/22 20:25:04 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:32:06 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define PHILO_H
 
 # include <stdio.h>
-# include	<stdlib.h>
-# include	<unistd.h>
-# include	<stdbool.h>
-# include	<pthread.h>
-# include	<sys/time.h>
-# include	<limits.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <limits.h>
 
 // every philo is a struct!
 //
@@ -28,45 +28,44 @@
 // fork = mutex; array of philo and array of mutex
 //
 //
-typedef struct s_sim t_sim;
-typedef struct s_philo t_philo;
+typedef struct s_sim	t_sim;
+typedef struct s_philo	t_philo;
 
-typedef struct	s_fork
+typedef struct s_fork
 {
 	pthread_mutex_t	fork;
-	int 	fork_id;
+	int				fork_id;
 }	t_fork;
 
-typedef	struct s_sim
+typedef struct s_sim
 {
-	long	philo_num;
-	long	start_time;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	meals_required;
-	bool	end_simulation;
-	pthread_t	monitor_thread;
+	long			philo_num;
+	long			start_time;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			meals_required;
+	bool			end_simulation;
+	pthread_t		monitor_thread;
 	pthread_mutex_t	*forks;
-	t_philo	*philos;
-	pthread_mutex_t	end_lock; //safely read/write end_simulation
-	pthread_mutex_t	print_lock; //safely print
+	t_philo			*philos;
+	pthread_mutex_t	end_lock;
+	pthread_mutex_t	print_lock;
 
 }	t_sim;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
-	int	id;
-	long		meals_eaten;
-	long		last_meal_time;
-	bool		full;
+	int					id;
+	long				meals_eaten;
+	long				last_meal_time;
+	bool				full;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t		meal_lock;
-	pthread_t	thread_id;
-	t_sim		*sim;
+	pthread_t			thread_id;
+	t_sim				*sim;
 }	t_philo;
-
 
 void	error_exit(char *error);
 void	parse_input(int argc, char **argv, t_sim *sim);
@@ -89,4 +88,8 @@ int		ft_strlen(char *str);
 int		is_num(char *str);
 int		ft_isdigit(char i);
 void	arg_parse(int argc, char **argv);
+void	precise_sleep(long duration_ms);
+void	struct_init(t_sim *sim, int i);
+void	one_philo(t_philo *philo );
+
 #endif

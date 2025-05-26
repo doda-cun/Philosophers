@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/22 19:20:15 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:23:57 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	*star_sim(t_sim *sim)
 {
 	int	i;
 
-	sim->start_time = get_time_ms(); // save simulation start time
+	sim->start_time = get_time_ms();
 	i = 0;
 	while (i < sim->philo_num)
 	{
 		if (pthread_create(&sim->philos[i].thread_id, NULL,
-				philo_routine, &sim->philos[i])!= 0)
+				philo_routine, &sim->philos[i]) != 0)
 			error_exit("Error creating thread");
 		i++;
 	}
@@ -47,7 +47,6 @@ void	join_threads(t_sim *sim)
 void	*monitor_simulation(void *arg)
 {
 	t_sim	*sim;
-
 
 	sim = (t_sim *)arg;
 	while (!simulation_has_ended(sim))
@@ -82,7 +81,7 @@ void	check_philo_death(t_sim *sim)
 			pthread_mutex_lock(&sim->print_lock);
 			printf("DEATH: At %ld ms after sim began, philosopher %d died\n",
 				now - sim->start_time, philo->id);
-			printf("Died: Philo %d time since last meal:%ld ms(limit:%ld ms) died",
+			printf("Philo %d time since last meal:%ld ms(limit:%ld ms)died",
 				philo->id, time_since_last_meal, sim->time_to_die);
 			pthread_mutex_unlock(&sim->print_lock);
 			return ;

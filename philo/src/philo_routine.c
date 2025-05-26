@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:06:39 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/22 19:40:26 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:35:20 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,16 @@ void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 	t_sim	*sim;
-//little delay for even numbers to avoid deadlock
+
 	philo = (t_philo *)arg;
 	sim = philo->sim;
-	//if (philo->id % 2 == 0)
-	usleep(philo->id * 1000);
-	// pthread_mutex_lock(&philo->meal_lock);
-	// philo->last_meal_time = get_time_ms();
-	// pthread_mutex_unlock(&philo->meal_lock);
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	// usleep(philo->id * 1000);
 	while (!simulation_has_ended(sim))
 	{
 		if (sim->philo_num == 1)
-		{
-			print_action(philo, "has taken a fork");
-			usleep(sim->time_to_die * 1000);
-			return (NULL);
-		}
-		//philo_think(philo);
+			one_philo(philo);
 		if (simulation_has_ended(sim))
 			break ;
 		take_forks(philo);
@@ -51,21 +44,29 @@ void	*philo_routine(void *arg)
 	return (NULL);
 }
 
+void	one_philo(t_philo *philo)
+{
+	print_action(philo, "has taken a fork");
+	usleep(philo->sim->time_to_die * 1000);
+	return ;
+
+}
+
 void	take_forks(t_philo *philo)
 {
 	if (simulation_has_ended(philo->sim))
-		return;
+		return ;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a right fork");
 		pthread_mutex_lock(philo->left_fork);
 		if (simulation_has_ended(philo->sim))
-        {
-            pthread_mutex_unlock(philo->right_fork);
+		{
+			pthread_mutex_unlock(philo->right_fork);
 			pthread_mutex_unlock(philo->left_fork);
-            return;
-        }
+			return ;
+		}
 		print_action(philo, "has taken a left fork");
 	}
 	else
@@ -74,11 +75,11 @@ void	take_forks(t_philo *philo)
 		print_action(philo, "has taken a left fork");
 		pthread_mutex_lock(philo->right_fork);
 		if (simulation_has_ended(philo->sim))
-        {
-            pthread_mutex_unlock(philo->left_fork);
+		{
+			pthread_mutex_unlock(philo->left_fork);
 			pthread_mutex_unlock(philo->right_fork);
-            return;
-        }
+			return ;
+		}
 		print_action(philo, "has taken a right fork");
 	}
 }
@@ -113,7 +114,9 @@ void	philo_eat(t_philo *philo)
 void	philo_sleep(t_philo *philo)
 {
 	print_action(philo, "is sleeping");
-	usleep(philo->sim->time_to_sleep * 1000);
+	precise_sleep(philo->sim->time_to_sleep);
+
+	// (philo->sim->time_to_sleep * 1000);
 }
 
 void	philo_think(t_philo *philo)
