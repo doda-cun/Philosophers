@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/26 18:23:57 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/27 17:55:07 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	check_philo_death(t_sim *sim)
 	t_philo	*philo;
 
 	i = 0;
+	now = get_time_ms();
 	while (i < sim->philo_num && !simulation_has_ended(sim))
 	{
 		philo = &sim->philos[i];
 		pthread_mutex_lock(&philo->meal_lock);
-		now = get_time_ms();
 		time_since_last_meal = now - philo->last_meal_time;
 		pthread_mutex_unlock(&philo->meal_lock);
 		if (time_since_last_meal >= sim->time_to_die)
@@ -81,7 +81,7 @@ void	check_philo_death(t_sim *sim)
 			pthread_mutex_lock(&sim->print_lock);
 			printf("DEATH: At %ld ms after sim began, philosopher %d died\n",
 				now - sim->start_time, philo->id);
-			printf("Philo %d time since last meal:%ld ms(limit:%ld ms)died",
+			printf("Philo %d time since last meal: %ld ms (limit: %ld ms)\n",
 				philo->id, time_since_last_meal, sim->time_to_die);
 			pthread_mutex_unlock(&sim->print_lock);
 			return ;

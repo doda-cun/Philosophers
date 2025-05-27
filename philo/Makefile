@@ -6,14 +6,14 @@
 #    By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/15 18:40:13 by doda-cun          #+#    #+#              #
-#    Updated: 2025/05/21 17:17:29 by doda-cun         ###   ########.fr        #
+#    Updated: 2025/05/27 18:37:41 by doda-cun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC)
+CFLAGS = -Wall -Wextra -Werror -pthread -I$(INC) -g
 SRCDIR = src
 OBJDIR = obj
 INC = inc/
