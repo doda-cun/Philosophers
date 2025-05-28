@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:06:39 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/28 17:04:59 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:56:56 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,23 @@ void	*philo_routine(void *arg)
 	while (!simulation_has_ended(sim))
 	{
 		take_forks(philo);
-		// if (simulation_has_ended(sim))
-		// 	break ;
 		philo_eat(philo);
 		if (simulation_has_ended(sim))
 			break ;
 		philo_sleep(philo);
-		// if (simulation_has_ended(sim))
-		// 	break ;
+		if (simulation_has_ended(sim))
+			break ;
 		philo_think(philo);
-		// if (simulation_has_ended(sim))
-		// 	break ;
 	}
 	return (NULL);
 }
 
-
 void	take_forks(t_philo *philo)
 {
-	// if (simulation_has_ended(philo->sim))
-	// 	return ;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a right fork");
-		// if (simulation_has_ended(philo->sim))
-		// {
-		// 	pthread_mutex_unlock(philo->right_fork);
-		// 	return ;
-		// }
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, "has taken a left fork");
 	}
@@ -62,11 +50,6 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, "has taken a left fork");
-		// if (simulation_has_ended(philo->sim))
-		// {
-		// 	pthread_mutex_unlock(philo->left_fork);
-		// 	return ;
-		// }
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a right fork");
 	}
@@ -94,7 +77,6 @@ void	philo_eat(t_philo *philo)
 		philo->full = true;
 		pthread_mutex_unlock(&philo->meal_lock);
 	}
-
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
