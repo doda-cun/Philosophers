@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:29:05 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/26 18:32:06 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:29:10 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		ft_strlen(char *str);
 int		is_num(char *str);
 int		ft_isdigit(char i);
 void	arg_parse(int argc, char **argv);
-void	precise_sleep(long duration_ms);
 void	struct_init(t_sim *sim, int i);
 void	one_philo(t_philo *philo );
 

@@ -6,14 +6,11 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:40:44 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/26 18:21:50 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:56:52 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// alloctae nad initialize forks, philos, shared sim values, like start time
-// each for must be amutext so only one philo holds it at a time
 
 void	simulation_init(t_sim *sim)
 {
@@ -48,7 +45,7 @@ void	struct_init(t_sim *sim, int i)
 	sim->philos[i].id = i + 1;
 	sim->philos[i].meals_eaten = 0;
 	sim->philos[i].last_meal_time = sim->start_time;
-	sim->philos[i].sim = sim; // lets each philo acces shared datat form their own thread
+	sim->philos[i].sim = sim;
 	sim->philos[i].left_fork = &sim->forks[i];
 	sim->philos[i].right_fork = &sim->forks[(i + 1) % sim->philo_num];
 	pthread_mutex_init(&sim->philos[i].meal_lock, NULL);

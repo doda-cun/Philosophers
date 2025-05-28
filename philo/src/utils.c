@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:42:42 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/26 17:47:29 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/27 18:55:18 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	print_action(t_philo *philo, const char *action)
 	pthread_mutex_unlock(&philo->sim->print_lock);
 }
 
-void	precise_sleep(long duration_ms)
+void	one_philo(t_philo *philo)
 {
-	long	start;
-
-	start = get_time_ms();
-	while ((get_time_ms() - start) < duration_ms)
-		usleep(100);
+	print_action(philo, "has taken a fork");
+	usleep(philo->sim->time_to_die * 1000);
+	return ;
 }

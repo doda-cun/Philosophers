@@ -1,0 +1,233 @@
+==17775== Helgrind, a thread error detector
+==17775== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==17775== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==17775== Command: ./philo 13 800 200 200 3
+==17775== 
+ 9 1 has taken a left fork
+ 14 1 has taken a right fork
+ 15 1 is eating
+ 17 3 has taken a left fork
+ 17 3 has taken a right fork
+ 17 3 is eating
+ 21 4 has taken a right fork
+ 23 7 has taken a left fork
+ 23 7 has taken a right fork
+ 23 7 is eating
+ 26 8 has taken a right fork
+ 28 11 has taken a left fork
+ 28 11 has taken a right fork
+ 28 11 is eating
+ 30 13 has taken a left fork
+ 217 1 is sleeping
+ 217 13 has taken a right fork
+ 218 13 is eating
+ 218 3 is sleeping
+ 219 4 has taken a left fork
+ 219 4 is eating
+ 219 2 has taken a right fork
+ 219 2 has taken a left fork
+ 219 2 is eating
+ 224 7 is sleeping
+ 225 8 has taken a left fork
+ 225 8 is eating
+ 225 6 has taken a right fork
+ 225 6 has taken a left fork
+ 225 6 is eating
+ 228 11 is sleeping
+ 229 10 has taken a right fork
+ 230 10 has taken a left fork
+ 230 10 is eating
+ 418 1 is thinking
+ 418 13 is sleeping
+ 419 12 has taken a right fork
+ 419 12 has taken a left fork
+ 419 12 is eating
+ 419 1 has taken a left fork
+ 420 3 is thinking
+ 420 4 is sleeping
+ 420 5 has taken a left fork
+ 421 2 is sleeping
+ 421 3 has taken a left fork
+ 421 3 has taken a right fork
+ 421 3 is eating
+ 421 1 has taken a right fork
+ 421 1 is eating
+ 425 7 is thinking
+ 425 9 has taken a left fork
+ 425 8 is sleeping
+ 426 7 has taken a left fork
+ 426 7 has taken a right fork
+ 426 7 is eating
+ 427 6 is sleeping
+ 427 5 has taken a right fork
+ 427 5 is eating
+ 428 11 is thinking
+ 430 10 is sleeping
+ 431 11 has taken a left fork
+ 431 9 has taken a right fork
+ 431 9 is eating
+ 618 13 is thinking
+ 620 12 is sleeping
+ 620 13 has taken a left fork
+ 620 11 has taken a right fork
+ 620 11 is eating
+ 621 4 is thinking
+ 621 2 is thinking
+ 623 3 is sleeping
+ 623 2 has taken a right fork
+ 623 1 is sleeping
+ 623 2 has taken a left fork
+ 623 2 is eating
+ 624 13 has taken a right fork
+ 624 13 is eating
+ 626 8 is thinking
+ 627 7 is sleeping
+ 627 6 is thinking
+ 628 6 has taken a right fork
+ 628 6 has taken a left fork
+ 629 6 is eating
+ 629 5 is sleeping
+ 629 4 has taken a right fork
+ 630 4 has taken a left fork
+ 630 4 is eating
+ 631 10 is thinking
+ 631 9 is sleeping
+ 632 8 has taken a right fork
+ 632 8 has taken a left fork
+ 632 8 is eating
+ 821 12 is thinking
+ 822 11 is sleeping
+ 822 10 has taken a right fork
+ 822 10 has taken a left fork
+ 822 10 is eating
+ 823 3 is thinking
+ 824 1 is thinking
+ 824 3 has taken a left fork
+ 825 2 is sleeping
+ 826 1 has taken a left fork
+ 826 1 has taken a right fork
+ 826 1 is eating
+ 827 13 is sleeping
+ 827 12 has taken a right fork
+ 827 12 has taken a left fork
+ 827 12 is eating
+ 828 7 is thinking
+ 829 5 is thinking
+ 829 6 is sleeping
+ 830 7 has taken a left fork
+ 831 5 has taken a left fork
+ 831 5 has taken a right fork
+ 831 5 is eating
+ 831 4 is sleeping
+ 832 9 is thinking
+ 832 3 has taken a right fork
+ 832 3 is eating
+ 833 8 is sleeping
+ 833 9 has taken a left fork
+ 834 7 has taken a right fork
+ 834 7 is eating
+ 1022 11 is thinking
+ 1023 10 is sleeping
+ 1023 9 has taken a right fork
+ 1024 9 is eating
+ 1024 11 has taken a left fork
+ 1026 2 is thinking
+ 1028 1 is sleeping
+ 1028 12 is sleeping
+ 1029 13 is thinking
+ 1029 11 has taken a right fork
+ 1029 11 is eating
+ 1030 13 has taken a left fork
+ 1030 13 has taken a right fork
+ 1030 13 is eating
+ 1030 6 is thinking
+ 1032 5 is sleeping
+ 1033 4 is thinking
+ 1033 3 is sleeping
+ 1034 2 has taken a right fork
+ 1034 2 has taken a left fork
+ 1034 2 is eating
+ 1034 4 has taken a right fork
+ 1034 4 has taken a left fork
+ 1034 4 is eating
+ 1034 8 is thinking
+ 1035 7 is sleeping
+ 1036 6 has taken a right fork
+ 1036 6 has taken a left fork
+ 1036 6 is eating
+ 1223 10 is thinking
+ 1224 9 is sleeping
+ 1224 8 has taken a right fork
+ 1224 8 has taken a left fork
+ 1224 8 is eating
+ 1228 1 is thinking
+ 1229 12 is thinking
+ 1230 13 is sleeping
+ 1231 11 is sleeping
+ 1231 1 has taken a left fork
+ 1231 10 has taken a right fork
+ 1231 10 has taken a left fork
+ 1232 10 is eating
+ 1232 12 has taken a right fork
+ 1232 12 has taken a left fork
+ 1232 12 is eating
+ 1233 5 is thinking
+ 1233 3 is thinking
+ 1235 4 is sleeping
+ 1235 3 has taken a left fork
+ 1235 3 has taken a right fork
+ 1236 3 is sleeping
+ 1237 2 is sleeping
+ 1237 5 has taken a left fork
+ 1238 1 has taken a right fork
+ 1238 7 is thinking
+ 1238 1 is sleeping
+ 1239 6 is sleeping
+ 1239 7 has taken a left fork
+ 1240 5 has taken a right fork
+ 1240 5 is eating
+ 1424 9 is thinking
+ 1425 9 has taken a left fork
+ 1425 8 is sleeping
+ 1426 7 has taken a right fork
+ 1427 7 is sleeping
+ 1431 13 is thinking
+ 1432 11 is thinking
+ 1433 12 is sleeping
+ 1433 11 has taken a left fork
+ 1433 11 has taken a right fork
+ 1433 11 is sleeping
+ 1434 10 is sleeping
+ 1434 13 has taken a left fork
+ 1434 13 has taken a right fork
+ 1435 9 has taken a right fork
+ 1435 9 is eating
+ 1435 13 is sleeping
+ 1436 4 is thinking
+ 1437 3 is thinking
+ 1437 2 is thinking
+ 1437 3 has taken a left fork
+ 1437 3 has taken a right fork
+ 1437 3 is sleeping
+ 1438 2 has taken a right fork
+ 1438 2 has taken a left fork
+ 1438 2 is sleeping
+ 1439 1 is thinking
+ 1439 6 is thinking
+ 1440 1 has taken a left fork
+ 1440 1 has taken a right fork
+ 1441 1 is sleeping
+ 1441 6 has taken a right fork
+ 1442 5 is sleeping
+ 1442 6 has taken a left fork
+ 1442 6 is sleeping
+ 1443 4 has taken a right fork
+ 1443 4 has taken a left fork
+ 1443 4 is sleeping
+ 1626 8 is thinking
+ 1626 1 died
+==17775== 
+==17775== Use --history-level=approx or =none to gain increased speed, at
+==17775== the cost of reduced accuracy of conflicting-access information
+==17775== For lists of detected and suppressed errors, rerun with: -s
+==17775== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 17674 from 141)

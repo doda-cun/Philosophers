@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/27 17:55:07 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:05:57 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	check_philo_death(t_sim *sim)
 
 	i = 0;
 	now = get_time_ms();
-	while (i < sim->philo_num && !simulation_has_ended(sim))
+	// while (i < sim->philo_num && !simulation_has_ended(sim))
+	while (i < sim->philo_num)
 	{
 		philo = &sim->philos[i];
 		pthread_mutex_lock(&philo->meal_lock);
@@ -75,15 +76,16 @@ void	check_philo_death(t_sim *sim)
 		pthread_mutex_unlock(&philo->meal_lock);
 		if (time_since_last_meal >= sim->time_to_die)
 		{
+			print_action(philo, "died");
 			pthread_mutex_lock(&sim->end_lock);
 			sim->end_simulation = true;
 			pthread_mutex_unlock(&sim->end_lock);
-			pthread_mutex_lock(&sim->print_lock);
-			printf("DEATH: At %ld ms after sim began, philosopher %d died\n",
-				now - sim->start_time, philo->id);
-			printf("Philo %d time since last meal: %ld ms (limit: %ld ms)\n",
-				philo->id, time_since_last_meal, sim->time_to_die);
-			pthread_mutex_unlock(&sim->print_lock);
+			// pthread_mutex_lock(&sim->print_lock);
+			// printf("DEATH: At %ld ms after sim began, philosopher %d died\n",
+			// 	now - sim->start_time, philo->id);
+			// printf("Philo %d time since last meal: %ld ms (limit: %ld ms)\n",
+			// 	philo->id, time_since_last_meal, sim->time_to_die);
+			// pthread_mutex_unlock(&sim->print_lock);
 			return ;
 		}
 		i++;

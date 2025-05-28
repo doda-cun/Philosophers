@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 17:48:10 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/26 18:21:25 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:02:33 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	arg_parse(int argc, char **argv)
 	while (i < argc)
 	{
 		if (argv[i][0] == '\0')
-			error_exit("Empty arg not allowed\n.");
+			error_exit("Empty arg not allowed.");
 		if (!is_pos_num(argv[i]))
-			error_exit("Error: only numeric arg allowed\n");
+			error_exit("Error: only numeric arg allowed");
 		if (ft_strlen(argv[i]) > 10 || ft_pos_atol(argv[i]) > INT_MAX)
-			error_exit("Error:number too large\n");
+			error_exit("Error:number too large");
 		i++;
 	}
 }

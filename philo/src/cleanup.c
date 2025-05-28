@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 18:28:11 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/20 18:41:25 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/27 19:57:31 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	sim_clean(t_sim *sim)
 {
 	int	i;
 
+	// i = 0;
+	// while( i < sim->philo_num)
+	// {
+	// 	pthread_join(sim->philos[i].thread_id,NULL);
+	// 	i++;
+	// }
 	i = 0;
 	while (i < sim->philo_num)
 	{
