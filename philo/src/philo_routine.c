@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:06:39 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/28 17:56:56 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:38:54 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	sim = philo->sim;
 	if (philo->id % 2 == 0)
-		usleep(500);
+		usleep(philo->sim->time_to_eat * 1000 / 2);
 	if (sim->philo_num == 1)
 		return (one_philo(philo), NULL);
 	while (!simulation_has_ended(sim))
