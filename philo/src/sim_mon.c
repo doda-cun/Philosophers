@@ -6,7 +6,7 @@
 /*   By: doda-cun <doda-cun@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:01:28 by doda-cun          #+#    #+#             */
-/*   Updated: 2025/05/28 17:55:57 by doda-cun         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:59:33 by doda-cun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	check_philo_death(t_sim *sim)
 			pthread_mutex_lock(&sim->end_lock);
 			sim->end_simulation = true;
 			pthread_mutex_unlock(&sim->end_lock);
-			pthread_mutex_lock(&sim->print_lock);
-			pthread_mutex_unlock(&sim->print_lock);
 			return ;
 		}
 		i++;
